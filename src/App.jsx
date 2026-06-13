@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from 'react'
+import profilePhoto from './assets/photo.jpg'
 
 // ─── DATA ───────────────────────────────────────────────────────────────────
 
 const STATS = [
   { value: '5+',  label: 'Years Experience' },
-  { value: '12+', label: 'Projects Delivered' },
+  { value: '19+', label: 'Projects Delivered' },
   { value: '20+', label: 'Technologies' },
   { value: '6',   label: 'Companies' },
 ]
@@ -16,7 +17,7 @@ const SKILL_CATEGORIES = [
   },
   {
     icon: '🌐', title: 'Web Frontend',
-    skills: ['React', 'Angular', 'Vue.js', 'JavaScript', 'TypeScript', 'HTML5', 'CSS3'],
+    skills: ['React', 'Angular', 'Vue.js', 'JavaScript', 'TypeScript', 'HTML', 'HTML5', 'CSS', 'CSS3'],
   },
   {
     icon: '⚙️', title: 'Backend & APIs',
@@ -24,7 +25,7 @@ const SKILL_CATEGORIES = [
   },
   {
     icon: '🗄️', title: 'Databases',
-    skills: ['MongoDB', 'SQL', 'MySQL', 'Firebase Firestore'],
+    skills: ['MongoDB', 'MySQL', 'PostgreSQL', 'SQL', 'Firebase Firestore'],
   },
   {
     icon: '☁️', title: 'Cloud & DevOps',
@@ -120,17 +121,25 @@ const EXPERIENCE = [
 ]
 
 const PROJECTS = [
-  { name: 'Jibika',         category: 'Flutter App',    icon: '💼', color: '#4ade80' },
-  { name: 'Euclea',         category: 'Flutter App',    icon: '📚', color: '#60a5fa' },
-  { name: 'MI Book',        category: 'Flutter App',    icon: '📖', color: '#f472b6' },
-  { name: 'Milkiyat',       category: 'Flutter App',    icon: '🏠', color: '#fb923c' },
-  { name: 'Milvik Health+', category: 'Healthcare App', icon: '🏥', color: '#34d399' },
-  { name: 'Namah',          category: 'Flutter App',    icon: '🧘', color: '#a78bfa' },
-  { name: 'NHCARE',         category: 'Healthcare App', icon: '❤️', color: '#2dd4bf' },
-  { name: 'KingsApp Doctor',category: 'Healthcare App', icon: '👨‍⚕️', color: '#fb7185' },
-  { name: 'FFA',            category: 'Flutter App',    icon: '🎯', color: '#facc15' },
-  { name: 'BiteNxt',        category: 'Food Tech App',  icon: '🍕', color: '#f97316' },
-  { name: 'GradsGateWay',   category: 'Education App',  icon: '🎓', color: '#818cf8' },
+  { name: 'BiteNxt',         category: 'Dental Hospital App',              icon: '🦷', color: '#f97316', location: 'India' },
+  { name: 'FFA',             category: 'Field Force Administration App',   icon: '👷', color: '#facc15', location: 'India' },
+  { name: 'Cadenca',         category: 'Pilot Scheduler App',              icon: '👨‍✈️', color: '#a78bfa', location: 'USA' },
+  { name: 'Dating App',      category: 'Social Dating Mobile App',         icon: '💘', color: '#f43f5e', location: 'USA' },
+  { name: 'HomeMine',        category: 'Real Estate Web App',              icon: '🏘️', color: '#fbbf24', location: 'USA' },
+  { name: 'MyPlaces',        category: 'Location & Map Mobile App',        icon: '📍', color: '#38bdf8', location: 'USA' },
+  { name: 'GeoTag',          category: 'Geo Tagging Mobile App',           icon: '🗺️', color: '#4ade80', location: 'USA' },
+  { name: 'CutBookings',     category: 'Web & Mobile Booking App',         icon: '✂️', color: '#e879f9', location: 'USA' },
+  { name: 'SEO Tool',        category: 'Internal SEO Tool',                icon: '🔍', color: '#fb923c', location: 'USA' },
+  { name: 'CIC Survey',      category: 'Airport Survey App',               icon: '✈️', color: '#60a5fa', location: 'USA' },
+  { name: 'Milvik Health+',  category: 'Healthcare App',                   icon: '🏥', color: '#34d399', location: 'India' },
+  { name: 'NHCARE',          category: 'Healthcare App',                   icon: '❤️', color: '#2dd4bf', location: 'India' },
+  { name: 'KingsApp Doctor', category: 'Healthcare App',                   icon: '👨‍⚕️', color: '#fb7185', location: 'India' },
+  { name: 'GradsGateWay',    category: 'Education App',                    icon: '🎓', color: '#818cf8', location: 'India' },
+  { name: 'Jibika',          category: 'Flutter App',                      icon: '💼', color: '#4ade80', location: 'India' },
+  { name: 'Euclea',          category: 'Flutter App',                      icon: '📚', color: '#60a5fa', location: 'India' },
+  { name: 'MI Book',         category: 'Flutter App',                      icon: '📖', color: '#f472b6', location: 'India' },
+  { name: 'Milkiyat',        category: 'Flutter App',                      icon: '🏠', color: '#a78bfa', location: 'India' },
+  { name: 'Namah',           category: 'Nurse App',                        icon: '👩‍⚕️', color: '#2dd4bf', location: 'India' },
 ]
 
 const EDUCATION = [
@@ -158,6 +167,11 @@ function useFadeIn() {
   return ref
 }
 
+function FadeCard({ children, className = '', style }) {
+  const ref = useFadeIn()
+  return <div className={`fade-in ${className}`} ref={ref} style={style}>{children}</div>
+}
+
 // ─── COMPONENTS ──────────────────────────────────────────────────────────────
 
 function Nav({ active, menuOpen, setMenuOpen }) {
@@ -179,7 +193,7 @@ function Nav({ active, menuOpen, setMenuOpen }) {
   return (
     <>
       <nav className={`nav${scrolled ? ' scrolled' : ''}`}>
-        <a className="nav-logo" href="#" onClick={e => { e.preventDefault(); scrollTo('home') }}>SK.</a>
+        <a className="nav-logo" href="#" onClick={e => { e.preventDefault(); scrollTo('home') }}>Sahana Kumari</a>
         <ul className="nav-links">
           {links.map(l => (
             <li key={l}>
@@ -263,7 +277,7 @@ function About() {
           <div className="avatar-wrapper">
             <div className="avatar-frame">
               <div className="avatar-inner">
-                <img src="/photo.jpg" alt="Sahana Kumari" />
+                <img src={profilePhoto} alt="Sahana Kumari" />
               </div>
               <div className="about-badge">📍 Bangalore, India</div>
             </div>
@@ -272,8 +286,8 @@ function About() {
             <h3>Hi there! I'm Sahana 👋</h3>
             <p>
               I'm a Software Developer with <strong style={{ color: 'var(--green)' }}>5+ years of experience</strong> in Mobile
-              Application Development. I've built and delivered <strong style={{ color: 'var(--green)' }}>12+ cross-platform projects</strong> for
-              Android, iOS, and Web across healthcare, education, fintech, and food-tech domains.
+              Application Development. I've built and delivered <strong style={{ color: 'var(--green)' }}>19+ cross-platform projects</strong> for
+              Android, iOS, and Web across healthcare, education, fintech, dental, and real estate domains.
             </p>
             <p>
               Beyond mobile, I'm proficient in full-stack web development (React, Angular, Vue.js, Node.js, PHP),
@@ -311,20 +325,17 @@ function Skills() {
           <div className="section-line" />
         </div>
         <div className="skills-grid">
-          {SKILL_CATEGORIES.map(cat => {
-            const cardRef = useFadeIn()
-            return (
-              <div className="skill-card fade-in" key={cat.title} ref={cardRef}>
-                <div className="skill-card-header">
-                  <span className="skill-icon">{cat.icon}</span>
-                  <span className="skill-card-title">{cat.title}</span>
-                </div>
-                <div className="skill-chips">
-                  {cat.skills.map(s => <span className="chip" key={s}>{s}</span>)}
-                </div>
+          {SKILL_CATEGORIES.map(cat => (
+            <FadeCard className="skill-card" key={cat.title}>
+              <div className="skill-card-header">
+                <span className="skill-icon">{cat.icon}</span>
+                <span className="skill-card-title">{cat.title}</span>
               </div>
-            )
-          })}
+              <div className="skill-chips">
+                {cat.skills.map(s => <span className="chip" key={s}>{s}</span>)}
+              </div>
+            </FadeCard>
+          ))}
         </div>
       </div>
     </section>
@@ -342,11 +353,9 @@ function Experience() {
           <div className="section-line" />
         </div>
         <div className="timeline">
-          {EXPERIENCE.map((job, i) => {
-            const itemRef = useFadeIn()
-            return (
-              <div className={`timeline-item${job.current ? ' current' : ''} fade-in`} key={i} ref={itemRef}>
-                <div className="exp-card">
+          {EXPERIENCE.map((job, i) => (
+            <FadeCard className={`timeline-item${job.current ? ' current' : ''}`} key={i}>
+              <div className="exp-card">
                   {job.current && (
                     <div className="current-badge">
                       <span className="current-dot" />Current Role
@@ -367,9 +376,8 @@ function Experience() {
                     {job.tech.map(t => <span className="tech-tag" key={t}>{t}</span>)}
                   </div>
                 </div>
-              </div>
-            )
-          })}
+            </FadeCard>
+          ))}
         </div>
       </div>
     </section>
@@ -387,22 +395,18 @@ function Projects() {
           <div className="section-line" />
         </div>
         <div className="projects-grid">
-          {PROJECTS.map((p, i) => {
-            const cardRef = useFadeIn()
-            return (
-              <div
-                className="project-card fade-in"
-                key={i}
-                ref={cardRef}
-                style={{ '--color': p.color }}
-              >
-                <div className="project-icon">{p.icon}</div>
-                <div className="project-name">{p.name}</div>
-                <div className="project-category">{p.category}</div>
-                <div className="project-arrow">↗</div>
+          {PROJECTS.map((p, i) => (
+            <FadeCard className="project-card" key={i} style={{ '--color': p.color }}>
+              <div className="project-icon">{p.icon}</div>
+              <div className="project-name">{p.name}</div>
+              <div className="project-category">{p.category}</div>
+              <div className="project-location">
+                <span>{p.location === 'USA' ? '🇺🇸' : '🇮🇳'}</span>
+                <span>{p.location}</span>
               </div>
-            )
-          })}
+              <div className="project-arrow">↗</div>
+            </FadeCard>
+          ))}
         </div>
       </div>
     </section>
@@ -420,19 +424,16 @@ function Education() {
           <div className="section-line" />
         </div>
         <div className="edu-grid">
-          {EDUCATION.map((e, i) => {
-            const eduRef = useFadeIn()
-            return (
-              <div className="edu-card fade-in" key={i} ref={eduRef}>
-                <div className="edu-icon">{e.icon}</div>
-                <div>
-                  <div className="edu-year">{e.year}</div>
-                  <div className="edu-degree">{e.degree}</div>
-                  <div className="edu-institution">{e.institution}</div>
-                </div>
+          {EDUCATION.map((e, i) => (
+            <FadeCard className="edu-card" key={i}>
+              <div className="edu-icon">{e.icon}</div>
+              <div>
+                <div className="edu-year">{e.year}</div>
+                <div className="edu-degree">{e.degree}</div>
+                <div className="edu-institution">{e.institution}</div>
               </div>
-            )
-          })}
+            </FadeCard>
+          ))}
         </div>
       </div>
     </section>
