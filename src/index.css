@@ -225,7 +225,14 @@ section { padding: 6.5rem 0; }
   align-items: center;
   width: 100%;
 }
-.hero-content { max-width: 740px; }
+.hero-content {
+  max-width: 740px;
+  animation: slideFromLeft 0.55s 0.08s var(--ease-out) both;
+}
+@keyframes slideFromLeft {
+  from { opacity: 0; transform: translateX(-18px); }
+  to { opacity: 1; transform: translateX(0); }
+}
 .hero-tag {
   display: inline-flex;
   align-items: center;
@@ -293,9 +300,56 @@ section { padding: 6.5rem 0; }
   background: var(--seo);
   color: #1a1403;
 }
+.hl-target {
+  position: relative;
+  display: inline-block;
+  padding-top: 2.1rem;
+}
+.point-cue {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.05rem;
+  color: var(--seo);
+  pointer-events: none;
+  z-index: 2;
+  animation: pointIn 0.4s 0.9s var(--ease-out) both;
+}
+.point-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--seo);
+}
+.point-arrow {
+  width: 16px;
+  height: 22px;
+  animation: pointBounce 0.9s var(--ease-in-out) 1.2s 4 both;
+}
 .badge-seo {
+  position: relative;
+  overflow: visible;
   color: var(--seo) !important;
   border-color: rgba(251, 191, 36, 0.45) !important;
+}
+.project-seo {
+  position: relative;
+  overflow: visible;
+}
+.project-seo .point-cue {
+  left: 12px;
+  top: -6px;
+  transform: none;
+}
+.featured-name.hl-target {
+  display: inline-block;
+  padding-top: 2.2rem;
 }
 .hero-btns {
   display: flex;
@@ -340,8 +394,10 @@ section { padding: 6.5rem 0; }
   gap: 2.2rem;
   margin-top: 3.2rem;
   flex-wrap: wrap;
+}
+.stat-item {
   opacity: 0;
-  animation: fadeUp 0.55s 0.62s var(--ease-out) forwards;
+  animation: fadeUp 0.45s var(--ease-out) forwards;
 }
 .stat-value {
   font-size: 1.85rem;
@@ -699,6 +755,8 @@ section { padding: 6.5rem 0; }
 }
 .project-category { font-size: 0.82rem; color: var(--text2); }
 .project-seo {
+  position: relative;
+  overflow: visible;
   border-color: rgba(251, 191, 36, 0.45);
   background: linear-gradient(180deg, rgba(251, 191, 36, 0.08), var(--card) 48%);
 }
@@ -819,16 +877,30 @@ section { padding: 6.5rem 0; }
   from { opacity: 0; transform: scale(0.96) translateY(10px); }
   to { opacity: 1; transform: scale(1) translateY(0); }
 }
-@keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(125, 211, 192, 0.4); }
-  50% { box-shadow: 0 0 0 7px rgba(125, 211, 192, 0); }
+@keyframes pointIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(-6px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+@keyframes pointBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
 }
 .fade-in {
   opacity: 0;
   transform: translateY(10px);
   transition: opacity 280ms var(--ease-out), transform 280ms var(--ease-out);
 }
-.fade-in.visible { opacity: 1; transform: translateY(0); }
+.fade-in.fade-left { transform: translateX(-22px); }
+.fade-in.fade-right { transform: translateX(22px); }
+.fade-in.visible { opacity: 1; transform: translate(0, 0); }
+
+.featured-card.visible .metric-block {
+  opacity: 0;
+  animation: fadeLeft 0.35s var(--ease-out) forwards;
+}
+.featured-card.visible .metric-block:nth-child(1) { animation-delay: 60ms; }
+.featured-card.visible .metric-block:nth-child(2) { animation-delay: 120ms; }
+.featured-card.visible .metric-block:nth-child(3) { animation-delay: 180ms; }
 
 @media (hover: hover) and (pointer: fine) {
   .nav-btn:hover { background: var(--accent-dim); }
@@ -881,6 +953,8 @@ section { padding: 6.5rem 0; }
   .hero-visual { order: -1; min-height: 0; justify-content: center; margin-bottom: 0.75rem; }
   .hero-badges { display: none; }
   .hero-portrait .avatar-frame { width: 220px; height: 220px; }
+  .point-cue { display: none; }
+  .hl-target { padding-top: 0; }
   .contact-grid,
   .featured-card,
   .skills-grid,
@@ -901,11 +975,13 @@ section { padding: 6.5rem 0; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .hero-tag, .hero-name, .hero-role, .hero-desc, .hero-btns, .hero-stats, .hero-visual, .tech-badge {
+  .hero-tag, .hero-name, .hero-role, .hero-desc, .hero-btns, .hero-stats, .hero-visual, .hero-content, .tech-badge, .stat-item {
     animation: none;
     opacity: 1;
     transform: none;
   }
+  .point-cue, .point-arrow { animation: none; }
+  .featured-card.visible .metric-block { animation: none; opacity: 1; }
   .fade-in { opacity: 1; transform: none; transition: none; }
   .current-dot { animation: none; }
   .mobile-menu { transition: none; }

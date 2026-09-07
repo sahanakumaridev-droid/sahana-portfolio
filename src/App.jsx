@@ -2,7 +2,7 @@ import { useState, useEffect, useLayoutEffect, useRef } from 'react'
 import profilePhoto from './assets/photo.jpg'
 
 const STATS = [
-  { value: '5+', label: 'Years Experience' },
+  { value: '6+', label: 'Years Experience' },
   { value: '21+', label: 'Products Shipped' },
   { value: '95%', label: 'AI Automation' },
   { value: 'Live', label: 'Client Services' },
@@ -224,12 +224,24 @@ function useFadeIn() {
   return ref
 }
 
-function FadeCard({ children, className = '', style }) {
+function FadeCard({ children, className = '', style, dir = 'up' }) {
   const ref = useFadeIn()
   return (
-    <div className={`fade-in ${className}`} ref={ref} style={style}>
+    <div className={`fade-in fade-${dir} ${className}`} ref={ref} style={style}>
       {children}
     </div>
+  )
+}
+
+function PointCue({ label }) {
+  return (
+    <span className="point-cue" aria-hidden="true">
+      <span className="point-label">{label}</span>
+      <svg className="point-arrow" viewBox="0 0 24 36" fill="none">
+        <path d="M12 2v26" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+        <path d="M5 20l7 12 7-12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </span>
   )
 }
 
@@ -372,7 +384,11 @@ function Hero() {
           <p className="hero-desc">
             Building scalable full-stack web applications, high-performance APIs, and next-generation
             AI automation — including a production{' '}
-            <mark className="hl hl-seo">SEO AI Automation Tool</mark> with clients already running
+            <span className="hl-target">
+              <PointCue label="I built this" />
+              <mark className="hl hl-seo">SEO AI Automation Tool</mark>
+            </span>{' '}
+            with clients already running
             successfully on a service-based model. Specializing in products that achieve{' '}
             <mark className="hl hl-ai">95% AI automation</mark> with{' '}
             <mark className="hl hl-human">5% human-in-the-loop</mark> oversight.
@@ -393,8 +409,8 @@ function Hero() {
             </a>
           </div>
           <div className="hero-stats">
-            {STATS.map((s) => (
-              <div className="stat-item" key={s.label}>
+            {STATS.map((s, i) => (
+              <div className="stat-item" key={s.label} style={{ animationDelay: `${0.62 + i * 0.08}s` }}>
                 <div className="stat-value">{s.value}</div>
                 <div className="stat-label">{s.label}</div>
               </div>
@@ -441,11 +457,16 @@ function About() {
             <h3>Sahana Kumari</h3>
             <p>
               Full-stack software engineer and AI systems architect with{' '}
-              <strong>5+ years</strong> shipping production software across web, mobile, APIs, and
+              <strong>6+ years</strong> shipping production software across web, mobile, APIs, and
               cloud. I design systems that scale, then automate the operational layer.
             </p>
             <p>
-              I built the <mark className="hl hl-seo">SEO AI Automation Tool</mark> — an LLM and RAG
+              I built the{' '}
+              <span className="hl-target">
+                <PointCue label="My product" />
+                <mark className="hl hl-seo">SEO AI Automation Tool</mark>
+              </span>{' '}
+              — an LLM and RAG
               product that researches, writes, and optimizes content at scale. Clients are already
               live on it as a <mark className="hl hl-live">service-based offering</mark>. Operating
               model: <mark className="hl hl-ai">95% autonomous execution</mark>,{' '}
@@ -481,8 +502,8 @@ function Skills() {
           <div className="section-line" />
         </div>
         <div className="skills-grid">
-          {SKILL_CATEGORIES.map((cat) => (
-            <FadeCard className="skill-card" key={cat.title}>
+          {SKILL_CATEGORIES.map((cat, i) => (
+            <FadeCard className="skill-card" dir={i % 2 === 0 ? 'left' : 'right'} key={cat.title}>
               <div className="skill-card-header">
                 <span className="skill-kicker">{cat.kicker}</span>
                 <span className="skill-card-title">{cat.title}</span>
@@ -518,10 +539,13 @@ function FeaturedProduct() {
           </h2>
           <div className="section-line" />
         </div>
-        <FadeCard className="featured-card">
+        <FadeCard className="featured-card" dir="left">
           <div className="featured-copy">
             <p className="featured-eyebrow">{p.eyebrow}</p>
-            <h3 className="featured-name">{p.name}</h3>
+            <h3 className="featured-name hl-target">
+              <PointCue label="Pointing here" />
+              {p.name}
+            </h3>
             <p className="featured-category">{p.category}</p>
             <p className="featured-summary">{p.summary}</p>
             <p className="featured-framework">{p.framework}</p>
@@ -573,7 +597,7 @@ function Experience() {
         </div>
         <div className="timeline">
           {EXPERIENCE.map((job, i) => (
-            <FadeCard className={`timeline-item${job.current ? ' current' : ''}`} key={i}>
+            <FadeCard className={`timeline-item${job.current ? ' current' : ''}`} dir="left" key={i}>
               <div className="exp-card">
                 {job.current && (
                   <div className="current-badge">
@@ -624,9 +648,11 @@ function Projects() {
           {PROJECTS.map((p, i) => (
             <FadeCard
               className={`project-card${p.name === 'SEO AI Automation Tool' ? ' project-seo' : ''}${p.name === 'Seven Pro' || p.name === 'Revive App' ? ' project-accent' : ''}`}
+              dir={i % 2 === 0 ? 'left' : 'right'}
               key={i}
             >
               <div className="project-meta">
+                {p.name === 'SEO AI Automation Tool' && <PointCue label="This one" />}
                 <span className="project-location">{p.location}</span>
               </div>
               <div className="project-name">{p.name}</div>
