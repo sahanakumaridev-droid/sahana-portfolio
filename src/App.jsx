@@ -1,39 +1,39 @@
 import { useState, useEffect, useRef } from 'react'
 import profilePhoto from './assets/photo.jpg'
 
-// ─── DATA ───────────────────────────────────────────────────────────────────
-
 const STATS = [
-  { value: '5+',  label: 'Years Experience' },
-  { value: '19+', label: 'Projects Delivered' },
-  { value: '20+', label: 'Technologies' },
-  { value: '6',   label: 'Companies' },
+  { value: '5+', label: 'Years Experience' },
+  { value: '19+', label: 'Products Shipped' },
+  { value: '95%', label: 'AI Automation' },
+  { value: '5%', label: 'Human Oversight' },
 ]
 
 const SKILL_CATEGORIES = [
   {
-    icon: '📱', title: 'Mobile Development',
-    skills: ['Flutter', 'Dart', 'Firebase', 'Bloc', 'GetX', 'Provider', 'Dio/http', 'geolocator', 'flutter_map', 'workmanager'],
+    kicker: '01',
+    title: 'Frontend',
+    skills: ['React', 'Angular', 'Vite', 'HTML5', 'CSS3', 'JavaScript (ES6+)', 'Flutter'],
   },
   {
-    icon: '🌐', title: 'Web Frontend',
-    skills: ['React', 'Angular', 'Vue.js', 'JavaScript', 'TypeScript', 'HTML', 'HTML5', 'CSS', 'CSS3'],
+    kicker: '02',
+    title: 'Backend & Databases',
+    skills: ['Python', 'Node.js', 'PHP', 'PostgreSQL', 'MongoDB', 'MySQL'],
   },
   {
-    icon: '⚙️', title: 'Backend & APIs',
-    skills: ['Node.js', 'PHP', 'Python', 'RESTful APIs', 'JSON APIs', 'Express.js'],
+    kicker: '03',
+    title: 'AI, LLMs & Automation',
+    skills: [
+      'Generative AI',
+      'LLM Integration',
+      'RAG (Retrieval-Augmented Generation)',
+      'AI-Driven SEO & Content Automation',
+      '95/5 Autonomous Workflow Architecture',
+    ],
   },
   {
-    icon: '🗄️', title: 'Databases',
-    skills: ['MongoDB', 'MySQL', 'PostgreSQL', 'SQL', 'Firebase Firestore'],
-  },
-  {
-    icon: '☁️', title: 'Cloud & DevOps',
-    skills: ['AWS', 'Digital Ocean', 'cPanel', 'Linux Servers', 'Git', 'GitHub', 'CI/CD'],
-  },
-  {
-    icon: '🤖', title: 'AI & Machine Learning',
-    skills: ['Python', 'LLM Integration', 'AI Tools Training', 'Machine Learning', 'NLP', 'AI APIs'],
+    kicker: '04',
+    title: 'Cloud & Deployment',
+    skills: ['AWS', 'DigitalOcean', 'Hostinger', 'GoDaddy', 'Namecheap', 'Linux/Server Management'],
   },
 ]
 
@@ -45,12 +45,12 @@ const EXPERIENCE = [
     period: 'Sep 2024 – Present',
     current: true,
     highlights: [
-      'Built scalable Backend & APIs with 24/7 Geo Location tracking',
-      'Integrated new technologies increasing capabilities and overall performance',
-      'Developed reusable components reducing development effort across multiple projects',
-      'Implemented effective debugging strategies resulting in fewer software defects',
+      'Built scalable backend services and APIs with 24/7 geo-location tracking',
+      'Integrated new technologies that increased product capabilities and runtime performance',
+      'Developed reusable components that reduced delivery effort across multiple product lines',
+      'Implemented debugging strategies that reduced defect rates in production',
     ],
-    tech: ['Flutter', 'Dart', 'BLOC', 'geolocator', 'Firebase', 'workmanager', 'flutter_map', 'RESTful APIs'],
+    tech: ['Flutter', 'Dart', 'BLOC', 'Firebase', 'RESTful APIs'],
   },
   {
     title: 'Software Engineer — Flutter Developer',
@@ -59,12 +59,11 @@ const EXPERIENCE = [
     period: 'Nov 2023 – Jun 2024',
     current: false,
     highlights: [
-      'Modernized legacy codebases to current development standards',
-      'Documented technical workflows to educate newly hired engineers',
-      'Planned and developed interfaces for simplified management and ease of use',
-      'Designed customized solutions for client proposals',
+      'Modernized legacy codebases to current engineering standards',
+      'Documented technical workflows to onboard new engineers faster',
+      'Designed interfaces that simplified operations for clinical and internal teams',
     ],
-    tech: ['Flutter', 'Dart', 'BLOC', 'RESTful API', 'Dio', 'Firebase'],
+    tech: ['Flutter', 'Dart', 'BLOC', 'RESTful API', 'Firebase'],
   },
   {
     title: 'Software Engineer — Flutter Developer',
@@ -73,11 +72,11 @@ const EXPERIENCE = [
     period: 'Jan 2023 – Oct 2023',
     current: false,
     highlights: [
-      'Updated legacy codebases to modern Flutter development standards',
-      'Coordinated with project management on database development timelines',
-      'Delivered customized mobile solutions for diverse clients',
+      'Updated legacy applications to modern Flutter architecture',
+      'Coordinated with project management on database and delivery timelines',
+      'Shipped customized mobile solutions for diverse clients',
     ],
-    tech: ['Flutter', 'Dart', 'BLOC', 'GetX', 'RESTful API', 'Firebase'],
+    tech: ['Flutter', 'Dart', 'BLOC', 'GetX', 'Firebase'],
   },
   {
     title: 'Software Engineer — Flutter Developer',
@@ -86,11 +85,11 @@ const EXPERIENCE = [
     period: 'Jan 2021 – Jan 2023',
     current: false,
     highlights: [
-      'Introduced agile methodologies and development best practices',
+      'Introduced agile practices and engineering quality bars',
       'Verified stability, security, and scalability of mobile applications',
-      'Delivered features consistently on time across sprint cycles',
+      'Delivered features consistently across sprint cycles',
     ],
-    tech: ['Flutter', 'Dart', 'BLOC', 'RESTful API', 'Dio', 'Firebase'],
+    tech: ['Flutter', 'Dart', 'BLOC', 'RESTful API', 'Firebase'],
   },
   {
     title: 'Mobile Application Developer',
@@ -99,11 +98,10 @@ const EXPERIENCE = [
     period: 'Jan 2020 – Jan 2021',
     current: false,
     highlights: [
-      'Introduced agile methodologies enhancing product development',
-      'Verified stability and security of Mobile Applications',
-      'Worked on sprint timelines delivering quality mobile solutions',
+      'Improved product development cadence with agile delivery',
+      'Verified stability and security of mobile applications',
     ],
-    tech: ['Flutter', 'Dart', 'BLOC', 'Firebase'],
+    tech: ['Flutter', 'Dart', 'Firebase'],
   },
   {
     title: 'Software Engineer',
@@ -112,45 +110,59 @@ const EXPERIENCE = [
     period: 'Jan 2019 – Jan 2020',
     current: false,
     highlights: [
-      'Designed immersive user interfaces using native mobile technologies',
-      'Used Android SDK to produce highly effective and nuanced content',
-      'Incorporated offline storage, performance tuning, and threading into apps',
+      'Designed mobile interfaces using native Android technologies',
+      'Incorporated offline storage, performance tuning, and threading',
     ],
-    tech: ['Android SDK', 'Java', 'Mobile Development'],
+    tech: ['Android SDK', 'Java'],
   },
 ]
 
+const FEATURED_PRODUCT = {
+  name: 'AetherOps',
+  eyebrow: 'Featured AI Product',
+  category: 'Enterprise AI Automation Platform',
+  summary:
+    'An enterprise-grade operations platform that combines large language models, retrieval-augmented generation, and AI SEO automation to run content, research, and publishing workflows with almost no manual load.',
+  framework:
+    'The 95/5 Autonomous Workflow Architecture keeps 95% of work fully automated while routing only 5% of high-risk decisions to human validation — cutting operational overhead without sacrificing quality control.',
+  capabilities: [
+    'LLM orchestration for research, drafting, and structured publishing',
+    'RAG pipelines over proprietary knowledge bases and live web sources',
+    'AI-driven SEO and content automation at production scale',
+    'Human-in-the-loop review only where compliance or brand risk requires it',
+  ],
+  stack: ['Python', 'LLMs', 'RAG', 'Node.js', 'PostgreSQL', 'AWS'],
+}
+
 const PROJECTS = [
-  { name: 'BiteNxt',         category: 'Dental Hospital App',              icon: '🦷', color: '#f97316', location: 'India' },
-  { name: 'FFA',             category: 'Field Force Administration App',   icon: '👷', color: '#facc15', location: 'India' },
-  { name: 'Cadenca',         category: 'Pilot Scheduler App',              icon: '👨‍✈️', color: '#a78bfa', location: 'USA' },
-  { name: 'Dating App',      category: 'Social Dating Mobile App',         icon: '💘', color: '#f43f5e', location: 'USA' },
-  { name: 'HomeMine',        category: 'Real Estate Web App',              icon: '🏘️', color: '#fbbf24', location: 'USA' },
-  { name: 'MyPlaces',        category: 'Location & Map Mobile App',        icon: '📍', color: '#38bdf8', location: 'USA' },
-  { name: 'GeoTag',          category: 'Geo Tagging Mobile App',           icon: '🗺️', color: '#4ade80', location: 'USA' },
-  { name: 'CutBookings',     category: 'Web & Mobile Booking App',         icon: '✂️', color: '#e879f9', location: 'USA' },
-  { name: 'SEO Tool',        category: 'Internal SEO Tool',                icon: '🔍', color: '#fb923c', location: 'USA' },
-  { name: 'CIC Survey',      category: 'Airport Survey App',               icon: '✈️', color: '#60a5fa', location: 'USA' },
-  { name: 'Milvik Health+',  category: 'Healthcare App',                   icon: '🏥', color: '#34d399', location: 'India' },
-  { name: 'NHCARE',          category: 'Healthcare App',                   icon: '❤️', color: '#2dd4bf', location: 'India' },
-  { name: 'KingsApp Doctor', category: 'Healthcare App',                   icon: '👨‍⚕️', color: '#fb7185', location: 'India' },
-  { name: 'GradsGateWay',    category: 'Education App',                    icon: '🎓', color: '#818cf8', location: 'India' },
-  { name: 'Jibika',          category: 'Flutter App',                      icon: '💼', color: '#4ade80', location: 'India' },
-  { name: 'Euclea',          category: 'Flutter App',                      icon: '📚', color: '#60a5fa', location: 'India' },
-  { name: 'MI Book',         category: 'Flutter App',                      icon: '📖', color: '#f472b6', location: 'India' },
-  { name: 'Milkiyat',        category: 'Flutter App',                      icon: '🏠', color: '#a78bfa', location: 'India' },
-  { name: 'Namah',           category: 'Nurse App',                        icon: '👩‍⚕️', color: '#2dd4bf', location: 'India' },
+  { name: 'BiteNxt', category: 'Dental Hospital App', location: 'India' },
+  { name: 'FFA', category: 'Field Force Administration', location: 'India' },
+  { name: 'Cadenca', category: 'Pilot Scheduler App', location: 'USA' },
+  { name: 'Dating App', category: 'Social Dating Platform', location: 'USA' },
+  { name: 'HomeMine', category: 'Real Estate Web App', location: 'USA' },
+  { name: 'MyPlaces', category: 'Location & Mapping', location: 'USA' },
+  { name: 'GeoTag', category: 'Geo Tagging Mobile App', location: 'USA' },
+  { name: 'CutBookings', category: 'Web & Mobile Booking', location: 'USA' },
+  { name: 'SEO Tool', category: 'Internal SEO Platform', location: 'USA' },
+  { name: 'CIC Survey', category: 'Airport Survey App', location: 'USA' },
+  { name: 'Milvik Health+', category: 'Healthcare App', location: 'India' },
+  { name: 'NHCARE', category: 'Healthcare App', location: 'India' },
+  { name: 'KingsApp Doctor', category: 'Healthcare App', location: 'India' },
+  { name: 'GradsGateWay', category: 'Education Platform', location: 'India' },
+  { name: 'Jibika', category: 'Flutter Application', location: 'India' },
+  { name: 'Euclea', category: 'Flutter Application', location: 'India' },
+  { name: 'MI Book', category: 'Flutter Application', location: 'India' },
+  { name: 'Milkiyat', category: 'Flutter Application', location: 'India' },
+  { name: 'Namah', category: 'Nurse Application', location: 'India' },
 ]
 
 const EDUCATION = [
-  { degree: 'BCA — Bachelor of Computer Applications', institution: 'Indian Academy Degree College Autonomous', year: '2018', icon: '🎓' },
-  { degree: 'Pre-University (CBSE)', institution: 'Indian Academy PU College', year: '2014', icon: '📚' },
-  { degree: 'High School (CBSE)',    institution: 'Siddhartha English High School', year: '2012', icon: '🏫' },
+  { degree: 'BCA — Bachelor of Computer Applications', institution: 'Indian Academy Degree College Autonomous', year: '2018' },
+  { degree: 'Pre-University (CBSE)', institution: 'Indian Academy PU College', year: '2014' },
+  { degree: 'High School (CBSE)', institution: 'Siddhartha English High School', year: '2012' },
 ]
 
-const TECH_BADGES = ['Flutter', 'Dart', 'React', 'Node.js', 'Python', 'AWS', 'Firebase', 'MongoDB']
-
-// ─── HOOKS ───────────────────────────────────────────────────────────────────
+const TECH_BADGES = ['React', 'Python', 'Node.js', 'RAG', 'AWS', 'PostgreSQL']
 
 function useFadeIn() {
   const ref = useRef(null)
@@ -158,7 +170,12 @@ function useFadeIn() {
     const el = ref.current
     if (!el) return
     const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { el.classList.add('visible'); obs.disconnect() } },
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add('visible')
+          obs.disconnect()
+        }
+      },
       { threshold: 0.1 }
     )
     obs.observe(el)
@@ -169,54 +186,100 @@ function useFadeIn() {
 
 function FadeCard({ children, className = '', style }) {
   const ref = useFadeIn()
-  return <div className={`fade-in ${className}`} ref={ref} style={style}>{children}</div>
+  return (
+    <div className={`fade-in ${className}`} ref={ref} style={style}>
+      {children}
+    </div>
+  )
 }
-
-// ─── COMPONENTS ──────────────────────────────────────────────────────────────
 
 function Nav({ active, menuOpen, setMenuOpen }) {
   const [scrolled, setScrolled] = useState(false)
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 50)
-    window.addEventListener('scroll', fn)
+    window.addEventListener('scroll', fn, { passive: true })
     return () => window.removeEventListener('scroll', fn)
   }, [])
 
-  const links = ['home', 'about', 'skills', 'experience', 'projects', 'contact']
+  const links = [
+    ['home', 'Home'],
+    ['about', 'About'],
+    ['skills', 'Skills'],
+    ['featured', 'Product'],
+    ['experience', 'Experience'],
+    ['projects', 'Work'],
+    ['contact', 'Contact'],
+  ]
 
   function scrollTo(id) {
     setMenuOpen(false)
-    if (id === 'home') { window.scrollTo({ top: 0, behavior: 'smooth' }); return }
+    if (id === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      return
+    }
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
     <>
       <nav className={`nav${scrolled ? ' scrolled' : ''}`}>
-        <a className="nav-logo" href="#" onClick={e => { e.preventDefault(); scrollTo('home') }}>Sahana Kumari</a>
+        <a
+          className="nav-logo"
+          href="#home"
+          onClick={(e) => {
+            e.preventDefault()
+            scrollTo('home')
+          }}
+        >
+          SK
+        </a>
         <ul className="nav-links">
-          {links.map(l => (
-            <li key={l}>
+          {links.map(([id, label]) => (
+            <li key={id}>
               <a
-                href={`#${l}`}
-                className={active === l ? 'active' : ''}
-                onClick={e => { e.preventDefault(); scrollTo(l) }}
-              >{l.charAt(0).toUpperCase() + l.slice(1)}</a>
+                href={`#${id}`}
+                className={active === id ? 'active' : ''}
+                onClick={(e) => {
+                  e.preventDefault()
+                  scrollTo(id)
+                }}
+              >
+                {label}
+              </a>
             </li>
           ))}
         </ul>
-        <a className="nav-btn" href="mailto:sahanakumari501@gmail.com">Hire Me</a>
-        <div className="hamburger" onClick={() => setMenuOpen(o => !o)}>
-          <span /><span /><span />
-        </div>
+        <a className="nav-btn" href="mailto:sahanakumari501@gmail.com">
+          Hire Me
+        </a>
+        <button
+          type="button"
+          className="hamburger"
+          aria-label="Toggle menu"
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((o) => !o)}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
       </nav>
       <div className={`mobile-menu${menuOpen ? ' open' : ''}`}>
-        {links.map(l => (
-          <a key={l} href={`#${l}`} onClick={e => { e.preventDefault(); scrollTo(l) }}>
-            {l.charAt(0).toUpperCase() + l.slice(1)}
+        {links.map(([id, label]) => (
+          <a
+            key={id}
+            href={`#${id}`}
+            onClick={(e) => {
+              e.preventDefault()
+              scrollTo(id)
+            }}
+          >
+            {label}
           </a>
         ))}
-        <a href="mailto:sahanakumari501@gmail.com" style={{ color: 'var(--green)', marginTop: '1rem' }}>✉ Hire Me</a>
+        <a href="mailto:sahanakumari501@gmail.com" className="mobile-hire">
+          Hire Me
+        </a>
       </div>
     </>
   )
@@ -226,28 +289,35 @@ function Hero() {
   return (
     <section id="home" className="hero">
       <div className="hero-bg" />
-      <div className="hero-grid" />
-      <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+      <div className="container hero-layout">
         <div className="hero-content">
-          <div className="hero-tag">Available for freelance work</div>
+          <p className="hero-tag">Open to U.S. remote &amp; hybrid roles</p>
           <h1 className="hero-name">
-            Sahana<br /><span>Kumari</span>
+            Sahana <span>Kumari</span>
           </h1>
-          <p className="hero-role">Senior Flutter Developer &amp; Full-Stack Engineer</p>
+          <p className="hero-role">Full-Stack Software Engineer &amp; AI Systems Architect</p>
           <p className="hero-desc">
-            5+ years building cross-platform mobile apps, web solutions, and AI-powered systems.
-            Expert in Flutter, React, Node.js, Python, AWS, and Digital Ocean deployments.
+            Building scalable full-stack web applications, high-performance APIs, and next-generation
+            AI automation. Specializing in high-efficiency digital products that achieve{' '}
+            <strong>95% AI automation</strong> with <strong>5% human-in-the-loop</strong> oversight.
           </p>
           <div className="hero-btns">
-            <a className="btn-primary" href="#projects" onClick={e => { e.preventDefault(); document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }) }}>
-              View My Work ↓
+            <a
+              className="btn-primary"
+              href="#featured"
+              onClick={(e) => {
+                e.preventDefault()
+                document.getElementById('featured')?.scrollIntoView({ behavior: 'smooth' })
+              }}
+            >
+              View featured product
             </a>
             <a className="btn-outline" href="mailto:sahanakumari501@gmail.com">
-              Get In Touch →
+              Contact
             </a>
           </div>
           <div className="hero-stats">
-            {STATS.map(s => (
+            {STATS.map((s) => (
               <div className="stat-item" key={s.label}>
                 <div className="stat-value">{s.value}</div>
                 <div className="stat-label">{s.label}</div>
@@ -255,8 +325,12 @@ function Hero() {
             ))}
           </div>
         </div>
-        <div className="hero-badges">
-          {TECH_BADGES.map(b => <div className="tech-badge" key={b}>{b}</div>)}
+        <div className="hero-badges" aria-hidden="true">
+          {TECH_BADGES.map((b) => (
+            <div className="tech-badge" key={b}>
+              {b}
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -269,8 +343,8 @@ function About() {
     <section id="about" className="about">
       <div className="container">
         <div className="section-header fade-in" ref={ref}>
-          <span className="section-number">01. About</span>
-          <h2 className="section-title">Who I Am</h2>
+          <span className="section-number">01 — About</span>
+          <h2 className="section-title">Engineer. Architect. Operator.</h2>
           <div className="section-line" />
         </div>
         <div className="about-grid">
@@ -279,31 +353,32 @@ function About() {
               <div className="avatar-inner">
                 <img src={profilePhoto} alt="Sahana Kumari" />
               </div>
-              <div className="about-badge">📍 Bangalore, India</div>
+              <div className="about-badge">Bangalore · Remote-ready</div>
             </div>
           </div>
           <div className="about-text">
-            <h3>Hi there! I'm Sahana 👋</h3>
+            <h3>Sahana Kumari</h3>
             <p>
-              I'm a Software Developer with <strong style={{ color: 'var(--green)' }}>5+ years of experience</strong> in Mobile
-              Application Development. I've built and delivered <strong style={{ color: 'var(--green)' }}>19+ cross-platform projects</strong> for
-              Android, iOS, and Web across healthcare, education, fintech, dental, and real estate domains.
+              Full-stack software engineer and AI systems architect with{' '}
+              <strong>5+ years</strong> shipping production software across web, mobile, APIs, and
+              cloud. I design systems that scale — then automate the operational layer so teams stay
+              focused on decisions, not repetitive work.
             </p>
             <p>
-              Beyond mobile, I'm proficient in full-stack web development (React, Angular, Vue.js, Node.js, PHP),
-              cloud deployments on <strong style={{ color: 'var(--green)' }}>AWS and Digital Ocean</strong>, and AI/ML integration with
-              Python and LLMs — making me a versatile engineer for end-to-end project delivery.
+              My work spans React and Angular frontends, Python and Node.js backends, and enterprise
+              AI stacks built on LLMs and RAG. The operating model is consistent:{' '}
+              <strong>95% autonomous execution</strong>, <strong>5% human validation</strong>.
             </p>
             <div className="about-highlights">
               {[
-                ['📧', 'sahanakumari501@gmail.com'],
-                ['📞', '+91 8618046831'],
-                ['📍', 'Bangalore, India 560077'],
-                ['💼', 'Open to Freelance & Full-time Opportunities'],
-                ['🌐', 'Available for Remote Work Worldwide'],
-              ].map(([icon, text]) => (
-                <div className="highlight-item" key={text}>
-                  <span>{icon}</span><span>{text}</span>
+                ['Email', 'sahanakumari501@gmail.com'],
+                ['Phone', '+91 8618046831'],
+                ['Location', 'Bangalore, India — available worldwide'],
+                ['Availability', 'Freelance, contract, and full-time'],
+              ].map(([label, text]) => (
+                <div className="highlight-item" key={label}>
+                  <span className="highlight-label">{label}</span>
+                  <span>{text}</span>
                 </div>
               ))}
             </div>
@@ -320,23 +395,76 @@ function Skills() {
     <section id="skills">
       <div className="container">
         <div className="section-header fade-in" ref={ref}>
-          <span className="section-number">02. Skills</span>
-          <h2 className="section-title">What I Work With</h2>
+          <span className="section-number">02 — Skills</span>
+          <h2 className="section-title">Technical skills matrix</h2>
           <div className="section-line" />
         </div>
         <div className="skills-grid">
-          {SKILL_CATEGORIES.map(cat => (
+          {SKILL_CATEGORIES.map((cat) => (
             <FadeCard className="skill-card" key={cat.title}>
               <div className="skill-card-header">
-                <span className="skill-icon">{cat.icon}</span>
+                <span className="skill-kicker">{cat.kicker}</span>
                 <span className="skill-card-title">{cat.title}</span>
               </div>
               <div className="skill-chips">
-                {cat.skills.map(s => <span className="chip" key={s}>{s}</span>)}
+                {cat.skills.map((s) => (
+                  <span className="chip" key={s}>
+                    {s}
+                  </span>
+                ))}
               </div>
             </FadeCard>
           ))}
         </div>
+      </div>
+    </section>
+  )
+}
+
+function FeaturedProduct() {
+  const ref = useFadeIn()
+  const p = FEATURED_PRODUCT
+  return (
+    <section id="featured" className="featured">
+      <div className="container">
+        <div className="section-header fade-in" ref={ref}>
+          <span className="section-number">03 — Featured</span>
+          <h2 className="section-title">Enterprise AI product</h2>
+          <div className="section-line" />
+        </div>
+        <FadeCard className="featured-card">
+          <div className="featured-copy">
+            <p className="featured-eyebrow">{p.eyebrow}</p>
+            <h3 className="featured-name">{p.name}</h3>
+            <p className="featured-category">{p.category}</p>
+            <p className="featured-summary">{p.summary}</p>
+            <p className="featured-framework">{p.framework}</p>
+            <ul className="featured-list">
+              {p.capabilities.map((c) => (
+                <li key={c}>{c}</li>
+              ))}
+            </ul>
+            <div className="exp-tech">
+              {p.stack.map((t) => (
+                <span className="tech-tag" key={t}>
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div className="featured-metrics" aria-label="Automation framework">
+            <div className="metric-block metric-ai">
+              <div className="metric-value">95%</div>
+              <div className="metric-label">AI automation</div>
+              <p>LLM, RAG, and SEO pipelines run end-to-end without waiting on a queue.</p>
+            </div>
+            <div className="metric-block metric-human">
+              <div className="metric-value">5%</div>
+              <div className="metric-label">Human validation</div>
+              <p>Reviewers intervene only on brand, legal, or high-stakes exceptions.</p>
+            </div>
+          </div>
+        </FadeCard>
       </div>
     </section>
   )
@@ -348,34 +476,41 @@ function Experience() {
     <section id="experience" className="experience">
       <div className="container">
         <div className="section-header fade-in" ref={ref}>
-          <span className="section-number">03. Experience</span>
-          <h2 className="section-title">Where I've Worked</h2>
+          <span className="section-number">04 — Experience</span>
+          <h2 className="section-title">Selected experience</h2>
           <div className="section-line" />
         </div>
         <div className="timeline">
           {EXPERIENCE.map((job, i) => (
             <FadeCard className={`timeline-item${job.current ? ' current' : ''}`} key={i}>
               <div className="exp-card">
-                  {job.current && (
-                    <div className="current-badge">
-                      <span className="current-dot" />Current Role
-                    </div>
-                  )}
-                  <div className="exp-header">
-                    <div>
-                      <div className="exp-title">{job.title}</div>
-                      <div className="exp-company">{job.company}</div>
-                      <div className="exp-location">📍 {job.location}</div>
-                    </div>
-                    <div className="exp-period">{job.period}</div>
+                {job.current && (
+                  <div className="current-badge">
+                    <span className="current-dot" />
+                    Current
                   </div>
-                  <ul className="exp-highlights">
-                    {job.highlights.map((h, j) => <li key={j}>{h}</li>)}
-                  </ul>
-                  <div className="exp-tech">
-                    {job.tech.map(t => <span className="tech-tag" key={t}>{t}</span>)}
+                )}
+                <div className="exp-header">
+                  <div>
+                    <div className="exp-title">{job.title}</div>
+                    <div className="exp-company">{job.company}</div>
+                    <div className="exp-location">{job.location}</div>
                   </div>
+                  <div className="exp-period">{job.period}</div>
                 </div>
+                <ul className="exp-highlights">
+                  {job.highlights.map((h, j) => (
+                    <li key={j}>{h}</li>
+                  ))}
+                </ul>
+                <div className="exp-tech">
+                  {job.tech.map((t) => (
+                    <span className="tech-tag" key={t}>
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </FadeCard>
           ))}
         </div>
@@ -390,21 +525,18 @@ function Projects() {
     <section id="projects">
       <div className="container">
         <div className="section-header fade-in" ref={ref}>
-          <span className="section-number">04. Projects</span>
-          <h2 className="section-title">Things I've Built</h2>
+          <span className="section-number">05 — Work</span>
+          <h2 className="section-title">Selected products</h2>
           <div className="section-line" />
         </div>
         <div className="projects-grid">
           {PROJECTS.map((p, i) => (
-            <FadeCard className="project-card" key={i} style={{ '--color': p.color }}>
-              <div className="project-icon">{p.icon}</div>
+            <FadeCard className="project-card" key={i}>
+              <div className="project-meta">
+                <span className="project-location">{p.location}</span>
+              </div>
               <div className="project-name">{p.name}</div>
               <div className="project-category">{p.category}</div>
-              <div className="project-location">
-                <span>{p.location === 'USA' ? '🇺🇸' : '🇮🇳'}</span>
-                <span>{p.location}</span>
-              </div>
-              <div className="project-arrow">↗</div>
             </FadeCard>
           ))}
         </div>
@@ -419,14 +551,13 @@ function Education() {
     <section id="education" className="education">
       <div className="container">
         <div className="section-header fade-in" ref={ref}>
-          <span className="section-number">05. Education</span>
-          <h2 className="section-title">Academic Background</h2>
+          <span className="section-number">06 — Education</span>
+          <h2 className="section-title">Education</h2>
           <div className="section-line" />
         </div>
         <div className="edu-grid">
           {EDUCATION.map((e, i) => (
             <FadeCard className="edu-card" key={i}>
-              <div className="edu-icon">{e.icon}</div>
               <div>
                 <div className="edu-year">{e.year}</div>
                 <div className="edu-degree">{e.degree}</div>
@@ -447,7 +578,7 @@ function Contact() {
 
   function handle(e) {
     const { name, value } = e.target
-    setForm(f => ({ ...f, [name]: value }))
+    setForm((f) => ({ ...f, [name]: value }))
   }
 
   function submit(e) {
@@ -461,32 +592,29 @@ function Contact() {
     <section id="contact">
       <div className="container">
         <div className="section-header fade-in" ref={ref}>
-          <span className="section-number">06. Contact</span>
-          <h2 className="section-title">Get In Touch</h2>
+          <span className="section-number">07 — Contact</span>
+          <h2 className="section-title">Let’s build the next system</h2>
           <div className="section-line" />
         </div>
         <div className="contact-grid">
           <div className="contact-intro">
-            <h3>Let's Work Together!</h3>
+            <h3>Available for U.S. teams</h3>
             <p>
-              I'm currently available for freelance projects and full-time opportunities.
-              Whether you need a Flutter mobile app, a web application, AI integration,
-              or cloud deployment — I'd love to hear about your project.
+              Open to remote and hybrid roles with U.S. companies — full-stack product work, AI
+              automation platforms, and high-performance APIs. If you need a 95/5 operating model in
+              production, we should talk.
             </p>
             <div className="contact-links">
               {[
-                { icon: '✉️', label: 'Email', value: 'sahanakumari501@gmail.com', href: 'mailto:sahanakumari501@gmail.com' },
-                { icon: '📞', label: 'Phone', value: '+91 8618046831', href: 'tel:+918618046831' },
-                { icon: '📍', label: 'Location', value: 'Bangalore, India 560077', href: '#' },
-                { icon: '💬', label: 'Available on', value: 'Upwork • LinkedIn • Email', href: '#' },
-              ].map(c => (
+                { label: 'Email', value: 'sahanakumari501@gmail.com', href: 'mailto:sahanakumari501@gmail.com' },
+                { label: 'Phone', value: '+91 8618046831', href: 'tel:+918618046831' },
+                { label: 'Location', value: 'Bangalore · Remote worldwide', href: '#contact' },
+              ].map((c) => (
                 <a className="contact-link" key={c.label} href={c.href}>
-                  <span className="contact-link-icon">{c.icon}</span>
                   <div className="contact-link-info">
                     <div className="contact-link-label">{c.label}</div>
                     <div className="contact-link-value">{c.value}</div>
                   </div>
-                  <span>→</span>
                 </a>
               ))}
             </div>
@@ -494,24 +622,24 @@ function Contact() {
           <form className="contact-form" onSubmit={submit}>
             <div className="form-row">
               <div className="form-group">
-                <label>Your Name</label>
-                <input name="name" value={form.name} onChange={handle} placeholder="John Doe" required />
+                <label htmlFor="name">Name</label>
+                <input id="name" name="name" value={form.name} onChange={handle} placeholder="Alex Chen" required />
               </div>
               <div className="form-group">
-                <label>Your Email</label>
-                <input name="email" type="email" value={form.email} onChange={handle} placeholder="john@example.com" required />
+                <label htmlFor="email">Email</label>
+                <input id="email" name="email" type="email" value={form.email} onChange={handle} placeholder="alex@company.com" required />
               </div>
             </div>
             <div className="form-group">
-              <label>Subject</label>
-              <input name="subject" value={form.subject} onChange={handle} placeholder="Project Inquiry" />
+              <label htmlFor="subject">Subject</label>
+              <input id="subject" name="subject" value={form.subject} onChange={handle} placeholder="Role or project" />
             </div>
             <div className="form-group">
-              <label>Message</label>
-              <textarea name="message" rows={5} value={form.message} onChange={handle} placeholder="Tell me about your project..." required />
+              <label htmlFor="message">Message</label>
+              <textarea id="message" name="message" rows={5} value={form.message} onChange={handle} placeholder="What are you building?" required />
             </div>
             <button className="form-submit" type="submit">
-              {sent ? '✓ Opening Email...' : 'Send Message →'}
+              {sent ? 'Opening email…' : 'Send message'}
             </button>
           </form>
         </div>
@@ -525,37 +653,43 @@ function Footer() {
     <footer className="footer">
       <div className="container">
         <div className="social-links">
-          <a className="social-link" href="mailto:sahanakumari501@gmail.com">✉ Email</a>
-          <a className="social-link" href="tel:+918618046831">📞 Phone</a>
-          <a className="social-link" href="https://linkedin.com" target="_blank" rel="noreferrer">💼 LinkedIn</a>
-          <a className="social-link" href="https://github.com" target="_blank" rel="noreferrer">⚡ GitHub</a>
+          <a className="social-link" href="mailto:sahanakumari501@gmail.com">
+            Email
+          </a>
+          <a className="social-link" href="tel:+918618046831">
+            Phone
+          </a>
+          <a className="social-link" href="https://linkedin.com" target="_blank" rel="noreferrer">
+            LinkedIn
+          </a>
+          <a className="social-link" href="https://github.com" target="_blank" rel="noreferrer">
+            GitHub
+          </a>
         </div>
-        <p className="footer-text" style={{ marginTop: '1rem' }}>
-          Designed &amp; Built by <span>Sahana Kumari</span> · Senior Flutter &amp; Full-Stack Developer
+        <p className="footer-text">
+          Designed &amp; built by <span>Sahana Kumari</span>
         </p>
-        <p className="footer-text" style={{ marginTop: '0.4rem', opacity: 0.6 }}>
-          sahanakumari501@gmail.com · +91 8618046831 · Bangalore, India
-        </p>
+        <p className="footer-text footer-sub">Full-Stack Software Engineer &amp; AI Systems Architect</p>
       </div>
     </footer>
   )
 }
-
-// ─── APP ──────────────────────────────────────────────────────────────────────
 
 export default function App() {
   const [active, setActive] = useState('home')
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
-    const sections = ['home', 'about', 'skills', 'experience', 'projects', 'education', 'contact']
+    const sections = ['home', 'about', 'skills', 'featured', 'experience', 'projects', 'education', 'contact']
     const obs = new IntersectionObserver(
-      entries => {
-        entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id) })
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActive(e.target.id)
+        })
       },
       { rootMargin: '-40% 0px -55% 0px' }
     )
-    sections.forEach(id => {
+    sections.forEach((id) => {
       const el = document.getElementById(id)
       if (el) obs.observe(el)
     })
@@ -566,15 +700,13 @@ export default function App() {
     <>
       <Nav active={active} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
       {menuOpen && (
-        <div
-          style={{ position: 'fixed', inset: 0, zIndex: 98, background: 'rgba(0,0,0,0.5)' }}
-          onClick={() => setMenuOpen(false)}
-        />
+        <div className="menu-scrim" onClick={() => setMenuOpen(false)} aria-hidden="true" />
       )}
       <main>
         <Hero />
         <About />
         <Skills />
+        <FeaturedProduct />
         <Experience />
         <Projects />
         <Education />
