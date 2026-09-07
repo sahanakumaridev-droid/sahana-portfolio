@@ -160,16 +160,41 @@ const FEATURED_PRODUCT = {
   eyebrow: 'Flagship product · Live in production',
   category: 'Service-based SEO & content automation for paying clients',
   summary:
-    'The SEO AI Automation Tool is the product I highlight first: an enterprise-grade platform that uses LLMs, RAG, and AI SEO automation to research, draft, optimize, and publish content at scale. Clients are already live on this as a managed, service-based offering — not a prototype.',
+    'The SEO AI Automation Tool is the product I highlight first: a production platform that uses LLMs plus RAG (site crawl, embeddings, retrieved context) to research, draft, optimize, and publish content at scale. Clients already run this as a managed service — live accounts, not a prototype.',
   framework:
-    'The 95/5 Autonomous Workflow Architecture keeps 95% of SEO and content operations fully automated, with 5% human validation. That mix cuts operational overhead while keeping brand and quality control. Successful client accounts run on this service every day.',
+    'The 95/5 workflow keeps 95% of SEO and content operations automated, with 5% human validation. That mix cuts overhead while keeping brand and quality control. Paying client accounts run on this service every day.',
   capabilities: [
-    'Keyword, SERP, and content-gap research driven by LLMs and RAG',
+    'Keyword and SERP research, with RAG grounded in the client’s live site',
     'On-page SEO drafts, internal linking, and publishing pipelines',
-    'Client work delivered as an ongoing service — live accounts in production',
-    'Human-in-the-loop review only for high-stakes brand or compliance checks',
+    'Ongoing service delivery — live accounts in production',
+    'Human-in-the-loop for the 5%: indexing, brand, and high-stakes quality',
   ],
-  stack: ['Python', 'LLMs', 'RAG', 'SEO Automation', 'Node.js', 'PostgreSQL', 'AWS'],
+  stack: ['Python', 'FastAPI', 'LLMs', 'RAG', 'PostgreSQL', 'SEO Automation'],
+  architecture: [
+    ['LLMs', 'Gemini 1.5 Flash (default); Llama 3.3 70B, GPT-4o, Claude as backups'],
+    ['RAG', 'Crawl + page inventory + MiniLM embeddings; Pinecone if enabled; LLM writes from retrieved site context'],
+    ['Images', 'Unsplash → Pexels → DALL·E 3'],
+  ],
+  metrics: [
+    {
+      value: '95%',
+      label: 'AI automation',
+      className: 'metric-ai',
+      copy: 'LLM + RAG research/grounding, then SEO draft and publish — no manual content queue.',
+    },
+    {
+      value: '5%',
+      label: 'Human validation',
+      className: 'metric-human',
+      copy: 'A person steps in for indexing, brand, and high-stakes checks — not every page.',
+    },
+    {
+      value: 'Live',
+      label: 'Service-based clients',
+      className: 'metric-live',
+      copy: 'Paying accounts already run on this SEO AI service in production.',
+    },
+  ],
 }
 
 const PROJECTS = [
@@ -561,23 +586,23 @@ function FeaturedProduct() {
                 </span>
               ))}
             </div>
+            <dl className="featured-arch">
+              {p.architecture.map(([k, v]) => (
+                <div className="featured-arch-row" key={k}>
+                  <dt>{k}</dt>
+                  <dd>{v}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
           <div className="featured-metrics" aria-label="Automation framework">
-            <div className="metric-block metric-ai">
-              <div className="metric-value">95%</div>
-              <div className="metric-label">AI automation</div>
-              <p>LLM, RAG, and SEO pipelines run end-to-end without waiting on a queue.</p>
-            </div>
-            <div className="metric-block metric-human">
-              <div className="metric-value">5%</div>
-              <div className="metric-label">Human validation</div>
-              <p>Reviewers intervene only on brand, legal, or high-stakes exceptions.</p>
-            </div>
-            <div className="metric-block metric-live">
-              <div className="metric-value">Live</div>
-              <div className="metric-label">Service-based clients</div>
-              <p>Paying accounts are already running successfully on this SEO AI service.</p>
-            </div>
+            {p.metrics.map((m) => (
+              <div className={`metric-block ${m.className}`} key={m.label}>
+                <div className="metric-value">{m.value}</div>
+                <div className="metric-label">{m.label}</div>
+                <p>{m.copy}</p>
+              </div>
+            ))}
           </div>
         </FadeCard>
       </div>

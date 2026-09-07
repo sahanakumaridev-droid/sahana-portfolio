@@ -613,6 +613,31 @@ section { padding: 6.5rem 0; }
   color: var(--text2);
 }
 .featured-list li { margin-bottom: 0.4rem; font-size: 0.92rem; }
+.featured-arch {
+  margin-top: 1.15rem;
+  display: grid;
+  gap: 0.7rem;
+}
+.featured-arch-row {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: 0.7rem;
+  align-items: start;
+}
+.featured-arch dt {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--seo);
+  padding-top: 0.12rem;
+}
+.featured-arch dd {
+  font-size: 0.82rem;
+  color: var(--text2);
+  line-height: 1.5;
+  margin: 0;
+}
 .featured-metrics { display: grid; gap: 1rem; align-content: start; }
 .metric-block {
   border: 1px solid var(--border);
@@ -987,6 +1012,7 @@ section { padding: 6.5rem 0; }
   .edu-grid { grid-template-columns: 1fr; }
   .form-row { grid-template-columns: 1fr; }
   .highlight-item { grid-template-columns: 1fr; gap: 0.15rem; }
+  .featured-arch-row { grid-template-columns: 1fr; gap: 0.2rem; }
 }
 
 @media (max-width: 600px) {
