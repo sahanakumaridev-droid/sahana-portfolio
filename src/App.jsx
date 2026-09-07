@@ -1,23 +1,47 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useLayoutEffect, useRef } from 'react'
 import profilePhoto from './assets/photo.jpg'
 
 const STATS = [
   { value: '5+', label: 'Years Experience' },
-  { value: '19+', label: 'Products Shipped' },
+  { value: '21+', label: 'Products Shipped' },
   { value: '95%', label: 'AI Automation' },
-  { value: '5%', label: 'Human Oversight' },
+  { value: 'Live', label: 'Client Services' },
 ]
 
 const SKILL_CATEGORIES = [
   {
     kicker: '01',
     title: 'Frontend',
-    skills: ['React', 'Angular', 'Vite', 'HTML5', 'CSS3', 'JavaScript (ES6+)', 'Flutter'],
+    skills: [
+      'React',
+      'Next.js',
+      'TypeScript',
+      'Angular',
+      'Vite',
+      'HTML5',
+      'CSS3',
+      'JavaScript (ES6+)',
+      'Tailwind CSS',
+      'Flutter',
+    ],
   },
   {
     kicker: '02',
     title: 'Backend & Databases',
-    skills: ['Python', 'Node.js', 'PHP', 'PostgreSQL', 'MongoDB', 'MySQL'],
+    skills: [
+      'Python',
+      'FastAPI',
+      'Node.js',
+      'Express.js',
+      'PHP',
+      'REST APIs',
+      'GraphQL',
+      'PostgreSQL',
+      'MongoDB',
+      'MySQL',
+      'Redis',
+      'Firebase',
+    ],
   },
   {
     kicker: '03',
@@ -25,15 +49,29 @@ const SKILL_CATEGORIES = [
     skills: [
       'Generative AI',
       'LLM Integration',
+      'OpenAI / Claude APIs',
+      'LangChain',
       'RAG (Retrieval-Augmented Generation)',
+      'Vector Databases',
+      'SEO AI Automation Tool',
       'AI-Driven SEO & Content Automation',
       '95/5 Autonomous Workflow Architecture',
     ],
   },
   {
     kicker: '04',
-    title: 'Cloud & Deployment',
-    skills: ['AWS', 'DigitalOcean', 'Hostinger', 'GoDaddy', 'Namecheap', 'Linux/Server Management'],
+    title: 'Cloud, DevOps & Delivery',
+    skills: [
+      'AWS',
+      'Docker',
+      'CI/CD',
+      'Git / GitHub',
+      'Linux/Server Management',
+      'DigitalOcean',
+      'Hostinger',
+      'GoDaddy',
+      'Namecheap',
+    ],
   },
 ]
 
@@ -118,33 +156,35 @@ const EXPERIENCE = [
 ]
 
 const FEATURED_PRODUCT = {
-  name: 'AetherOps',
-  eyebrow: 'Featured AI Product',
-  category: 'Enterprise AI Automation Platform',
+  name: 'SEO AI Automation Tool',
+  eyebrow: 'Flagship product · Live in production',
+  category: 'Service-based SEO & content automation for paying clients',
   summary:
-    'An enterprise-grade operations platform that combines large language models, retrieval-augmented generation, and AI SEO automation to run content, research, and publishing workflows with almost no manual load.',
+    'The SEO AI Automation Tool is the product I highlight first: an enterprise-grade platform that uses LLMs, RAG, and AI SEO automation to research, draft, optimize, and publish content at scale. Clients are already live on this as a managed, service-based offering — not a prototype.',
   framework:
-    'The 95/5 Autonomous Workflow Architecture keeps 95% of work fully automated while routing only 5% of high-risk decisions to human validation — cutting operational overhead without sacrificing quality control.',
+    'The 95/5 Autonomous Workflow Architecture keeps 95% of SEO and content operations fully automated, with 5% human validation. That mix cuts operational overhead while keeping brand and quality control. Successful client accounts run on this service every day.',
   capabilities: [
-    'LLM orchestration for research, drafting, and structured publishing',
-    'RAG pipelines over proprietary knowledge bases and live web sources',
-    'AI-driven SEO and content automation at production scale',
-    'Human-in-the-loop review only where compliance or brand risk requires it',
+    'Keyword, SERP, and content-gap research driven by LLMs and RAG',
+    'On-page SEO drafts, internal linking, and publishing pipelines',
+    'Client work delivered as an ongoing service — live accounts in production',
+    'Human-in-the-loop review only for high-stakes brand or compliance checks',
   ],
-  stack: ['Python', 'LLMs', 'RAG', 'Node.js', 'PostgreSQL', 'AWS'],
+  stack: ['Python', 'LLMs', 'RAG', 'SEO Automation', 'Node.js', 'PostgreSQL', 'AWS'],
 }
 
 const PROJECTS = [
+  { name: 'Seven Pro', category: 'Web Application', location: 'Production' },
+  { name: 'Revive App', category: 'Medicine Delivery App', location: 'Production' },
+  { name: 'SEO AI Automation Tool', category: 'Service-based SEO platform · live clients', location: 'Production' },
   { name: 'BiteNxt', category: 'Dental Hospital App', location: 'India' },
   { name: 'FFA', category: 'Field Force Administration', location: 'India' },
-  { name: 'Cadenca', category: 'Pilot Scheduler App', location: 'USA' },
-  { name: 'Dating App', category: 'Social Dating Platform', location: 'USA' },
-  { name: 'HomeMine', category: 'Real Estate Web App', location: 'USA' },
-  { name: 'MyPlaces', category: 'Location & Mapping', location: 'USA' },
-  { name: 'GeoTag', category: 'Geo Tagging Mobile App', location: 'USA' },
-  { name: 'CutBookings', category: 'Web & Mobile Booking', location: 'USA' },
-  { name: 'SEO Tool', category: 'Internal SEO Platform', location: 'USA' },
-  { name: 'CIC Survey', category: 'Airport Survey App', location: 'USA' },
+  { name: 'Cadenca', category: 'Pilot Scheduler App', location: 'Remote' },
+  { name: 'Dating App', category: 'Social Dating Platform', location: 'Remote' },
+  { name: 'HomeMine', category: 'Real Estate Web App', location: 'Remote' },
+  { name: 'MyPlaces', category: 'Location & Mapping', location: 'Remote' },
+  { name: 'GeoTag', category: 'Geo Tagging Mobile App', location: 'Remote' },
+  { name: 'CutBookings', category: 'Web & Mobile Booking', location: 'Remote' },
+  { name: 'CIC Survey', category: 'Airport Survey App', location: 'Remote' },
   { name: 'Milvik Health+', category: 'Healthcare App', location: 'India' },
   { name: 'NHCARE', category: 'Healthcare App', location: 'India' },
   { name: 'KingsApp Doctor', category: 'Healthcare App', location: 'India' },
@@ -162,7 +202,7 @@ const EDUCATION = [
   { degree: 'High School (CBSE)', institution: 'Siddhartha English High School', year: '2012' },
 ]
 
-const TECH_BADGES = ['React', 'Python', 'Node.js', 'RAG', 'AWS', 'PostgreSQL']
+const TECH_BADGES = ['React', 'TypeScript', 'Next.js', 'Python', 'RAG', 'SEO AI', 'AWS', 'PostgreSQL']
 
 function useFadeIn() {
   const ref = useRef(null)
@@ -195,6 +235,9 @@ function FadeCard({ children, className = '', style }) {
 
 function Nav({ active, menuOpen, setMenuOpen }) {
   const [scrolled, setScrolled] = useState(false)
+  const listRef = useRef(null)
+  const indicatorRef = useRef(null)
+
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 50)
     window.addEventListener('scroll', fn, { passive: true })
@@ -210,6 +253,32 @@ function Nav({ active, menuOpen, setMenuOpen }) {
     ['projects', 'Work'],
     ['contact', 'Contact'],
   ]
+
+  function slideTo(el) {
+    const list = listRef.current
+    const indicator = indicatorRef.current
+    if (!list || !indicator || !el) return
+    const lr = list.getBoundingClientRect()
+    const ar = el.getBoundingClientRect()
+    const x = ar.left - lr.left
+    const w = ar.width
+    indicator.style.transform = `translate3d(${x}px, 0, 0) scaleX(${w})`
+  }
+
+  function slideToActive() {
+    const el = listRef.current?.querySelector('a.active')
+    if (el) slideTo(el)
+  }
+
+  useLayoutEffect(() => {
+    const frame = requestAnimationFrame(() => slideToActive())
+    const onResize = () => slideToActive()
+    window.addEventListener('resize', onResize)
+    return () => {
+      cancelAnimationFrame(frame)
+      window.removeEventListener('resize', onResize)
+    }
+  }, [active])
 
   function scrollTo(id) {
     setMenuOpen(false)
@@ -233,12 +302,15 @@ function Nav({ active, menuOpen, setMenuOpen }) {
         >
           SK
         </a>
-        <ul className="nav-links">
+        <div className="nav-links" ref={listRef} onMouseLeave={slideToActive}>
+          <span className="nav-indicator" ref={indicatorRef} aria-hidden="true" />
+          <ul className="nav-list">
           {links.map(([id, label]) => (
             <li key={id}>
               <a
                 href={`#${id}`}
                 className={active === id ? 'active' : ''}
+                onMouseEnter={(e) => slideTo(e.currentTarget)}
                 onClick={(e) => {
                   e.preventDefault()
                   scrollTo(id)
@@ -248,7 +320,8 @@ function Nav({ active, menuOpen, setMenuOpen }) {
               </a>
             </li>
           ))}
-        </ul>
+          </ul>
+        </div>
         <a className="nav-btn" href="mailto:sahanakumari501@gmail.com">
           Hire Me
         </a>
@@ -291,26 +364,29 @@ function Hero() {
       <div className="hero-bg" />
       <div className="container hero-layout">
         <div className="hero-content">
-          <p className="hero-tag">Open to U.S. remote &amp; hybrid roles</p>
+          <p className="hero-tag">Open to remote &amp; hybrid roles</p>
           <h1 className="hero-name">
             Sahana <span>Kumari</span>
           </h1>
           <p className="hero-role">Full-Stack Software Engineer &amp; AI Systems Architect</p>
           <p className="hero-desc">
             Building scalable full-stack web applications, high-performance APIs, and next-generation
-            AI automation. Specializing in high-efficiency digital products that achieve{' '}
-            <strong>95% AI automation</strong> with <strong>5% human-in-the-loop</strong> oversight.
+            AI automation — including a production{' '}
+            <mark className="hl hl-seo">SEO AI Automation Tool</mark> with clients already running
+            successfully on a service-based model. Specializing in products that achieve{' '}
+            <mark className="hl hl-ai">95% AI automation</mark> with{' '}
+            <mark className="hl hl-human">5% human-in-the-loop</mark> oversight.
           </p>
           <div className="hero-btns">
             <a
-              className="btn-primary"
+              className="btn-primary btn-seo"
               href="#featured"
               onClick={(e) => {
                 e.preventDefault()
                 document.getElementById('featured')?.scrollIntoView({ behavior: 'smooth' })
               }}
             >
-              View featured product
+              View SEO AI Automation Tool
             </a>
             <a className="btn-outline" href="mailto:sahanakumari501@gmail.com">
               Contact
@@ -325,12 +401,26 @@ function Hero() {
             ))}
           </div>
         </div>
-        <div className="hero-badges" aria-hidden="true">
-          {TECH_BADGES.map((b) => (
-            <div className="tech-badge" key={b}>
-              {b}
+        <div className="hero-visual">
+          <div className="hero-portrait">
+            <div className="avatar-frame">
+              <div className="avatar-inner">
+                <img src={profilePhoto} alt="Sahana Kumari" />
+              </div>
+              <div className="about-badge">Bangalore · Remote-ready</div>
             </div>
-          ))}
+          </div>
+          <div className="hero-badges" aria-hidden="true">
+            {TECH_BADGES.map((b, i) => (
+              <div
+                className={`tech-badge${b === 'SEO AI' ? ' badge-seo' : ''}`}
+                key={b}
+                style={{ animationDelay: `${0.55 + i * 0.05}s` }}
+              >
+                {b}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -347,27 +437,19 @@ function About() {
           <h2 className="section-title">Engineer. Architect. Operator.</h2>
           <div className="section-line" />
         </div>
-        <div className="about-grid">
-          <div className="avatar-wrapper">
-            <div className="avatar-frame">
-              <div className="avatar-inner">
-                <img src={profilePhoto} alt="Sahana Kumari" />
-              </div>
-              <div className="about-badge">Bangalore · Remote-ready</div>
-            </div>
-          </div>
-          <div className="about-text">
+        <div className="about-text">
             <h3>Sahana Kumari</h3>
             <p>
               Full-stack software engineer and AI systems architect with{' '}
               <strong>5+ years</strong> shipping production software across web, mobile, APIs, and
-              cloud. I design systems that scale — then automate the operational layer so teams stay
-              focused on decisions, not repetitive work.
+              cloud. I design systems that scale, then automate the operational layer.
             </p>
             <p>
-              My work spans React and Angular frontends, Python and Node.js backends, and enterprise
-              AI stacks built on LLMs and RAG. The operating model is consistent:{' '}
-              <strong>95% autonomous execution</strong>, <strong>5% human validation</strong>.
+              I built the <mark className="hl hl-seo">SEO AI Automation Tool</mark> — an LLM and RAG
+              product that researches, writes, and optimizes content at scale. Clients are already
+              live on it as a <mark className="hl hl-live">service-based offering</mark>. Operating
+              model: <mark className="hl hl-ai">95% autonomous execution</mark>,{' '}
+              <mark className="hl hl-human">5% human validation</mark>.
             </p>
             <div className="about-highlights">
               {[
@@ -382,7 +464,6 @@ function About() {
                 </div>
               ))}
             </div>
-          </div>
         </div>
       </div>
     </section>
@@ -408,7 +489,10 @@ function Skills() {
               </div>
               <div className="skill-chips">
                 {cat.skills.map((s) => (
-                  <span className="chip" key={s}>
+                  <span
+                    className={`chip${s.includes('SEO AI') ? ' chip-seo' : ''}`}
+                    key={s}
+                  >
                     {s}
                   </span>
                 ))}
@@ -429,7 +513,9 @@ function FeaturedProduct() {
       <div className="container">
         <div className="section-header fade-in" ref={ref}>
           <span className="section-number">03 — Featured</span>
-          <h2 className="section-title">Enterprise AI product</h2>
+          <h2 className="section-title">
+            <span className="title-seo">SEO AI Automation Tool</span>
+          </h2>
           <div className="section-line" />
         </div>
         <FadeCard className="featured-card">
@@ -462,6 +548,11 @@ function FeaturedProduct() {
               <div className="metric-value">5%</div>
               <div className="metric-label">Human validation</div>
               <p>Reviewers intervene only on brand, legal, or high-stakes exceptions.</p>
+            </div>
+            <div className="metric-block metric-live">
+              <div className="metric-value">Live</div>
+              <div className="metric-label">Service-based clients</div>
+              <p>Paying accounts are already running successfully on this SEO AI service.</p>
             </div>
           </div>
         </FadeCard>
@@ -531,7 +622,10 @@ function Projects() {
         </div>
         <div className="projects-grid">
           {PROJECTS.map((p, i) => (
-            <FadeCard className="project-card" key={i}>
+            <FadeCard
+              className={`project-card${p.name === 'SEO AI Automation Tool' ? ' project-seo' : ''}${p.name === 'Seven Pro' || p.name === 'Revive App' ? ' project-accent' : ''}`}
+              key={i}
+            >
               <div className="project-meta">
                 <span className="project-location">{p.location}</span>
               </div>
@@ -598,11 +692,11 @@ function Contact() {
         </div>
         <div className="contact-grid">
           <div className="contact-intro">
-            <h3>Available for U.S. teams</h3>
+            <h3>Open to remote &amp; hybrid roles</h3>
             <p>
-              Open to remote and hybrid roles with U.S. companies — full-stack product work, AI
-              automation platforms, and high-performance APIs. If you need a 95/5 operating model in
-              production, we should talk.
+              Available for full-stack product work, high-performance APIs, and the SEO AI Automation
+              Tool already serving live clients. If you need a 95/5 operating model in production, we
+              should talk.
             </p>
             <div className="contact-links">
               {[
