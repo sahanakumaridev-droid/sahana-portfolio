@@ -162,15 +162,6 @@ const FEATURED_PRODUCT = {
   summary:
     'Research, create, optimize and publish SEO content automatically — with humans handling only high-value validation.',
   automated: ['Research', 'Content', 'Optimization', 'Publishing'],
-  pipeline: [
-    'Website',
-    'Crawl',
-    'RAG + Research',
-    'AI Content',
-    'SEO Optimization',
-    'Human Validation',
-    'Publish',
-  ],
   stack: ['Python', 'FastAPI', 'LLMs', 'RAG', 'PostgreSQL'],
 }
 
@@ -559,23 +550,6 @@ function FeaturedProduct() {
               </ul>
             </div>
           </div>
-
-          <ol className="pipeline">
-            {p.pipeline.map((step, i) => (
-              <li
-                className="pipeline-step"
-                key={step}
-                style={{ animationDelay: `${80 + i * 70}ms` }}
-              >
-                <span className="pipeline-name">{step}</span>
-                {i < p.pipeline.length - 1 && (
-                  <span className="pipeline-arrow" aria-hidden="true">
-                    ↓
-                  </span>
-                )}
-              </li>
-            ))}
-          </ol>
 
           <div className="featured-foot">
             <div className="foot-block">
