@@ -156,13 +156,45 @@ const EXPERIENCE = [
 ]
 
 const FEATURED_PRODUCT = {
-  name: 'SEO AI Automation',
+  name: 'SEO AI Automation Tool',
   eyebrow: 'Flagship product · Live in production',
-  headline: '95% of SEO operations, automated.',
+  category: 'Service-based SEO & content automation for paying clients',
   summary:
-    'Research, create, optimize and publish SEO content automatically — with humans handling only high-value validation.',
-  automated: ['Research', 'Content', 'Optimization', 'Publishing'],
-  stack: ['Python', 'FastAPI', 'LLMs', 'RAG', 'PostgreSQL'],
+    'The SEO AI Automation Tool is the product I highlight first: a production platform that uses LLMs plus RAG (site crawl, embeddings, retrieved context) to research, draft, optimize, and publish content at scale. Clients already run this as a managed service — live accounts, not a prototype.',
+  framework:
+    'The 95/5 workflow keeps 95% of SEO and content operations automated, with 5% human validation. That mix cuts overhead while keeping brand and quality control. Paying client accounts run on this service every day.',
+  capabilities: [
+    'Keyword and SERP research, with RAG grounded in the client’s live site',
+    'On-page SEO drafts, internal linking, and publishing pipelines',
+    'Ongoing service delivery — live accounts in production',
+    'Human-in-the-loop for the 5%: indexing, brand, and high-stakes quality',
+  ],
+  stack: ['Python', 'FastAPI', 'LLMs', 'RAG', 'PostgreSQL', 'SEO Automation'],
+  architecture: [
+    ['LLMs', 'Gemini 1.5 Flash (default); Llama 3.3 70B, GPT-4o, Claude as backups'],
+    ['RAG', 'Crawl + page inventory + MiniLM embeddings; Pinecone if enabled; LLM writes from retrieved site context'],
+    ['Images', 'Unsplash → Pexels → DALL·E 3'],
+  ],
+  metrics: [
+    {
+      value: '95%',
+      label: 'AI automation',
+      className: 'metric-ai',
+      copy: 'LLM + RAG research/grounding, then SEO draft and publish — no manual content queue.',
+    },
+    {
+      value: '5%',
+      label: 'Human validation',
+      className: 'metric-human',
+      copy: 'A person steps in for indexing, brand, and high-stakes checks — not every page.',
+    },
+    {
+      value: 'Live',
+      label: 'Service-based clients',
+      className: 'metric-live',
+      copy: 'Paying accounts already run on this SEO AI service in production.',
+    },
+  ],
 }
 
 const PROJECTS = [
@@ -528,45 +560,48 @@ function FeaturedProduct() {
         <div className="section-header fade-in" ref={ref}>
           <span className="section-number">03 — Featured</span>
           <h2 className="section-title">
-            <span className="title-seo">SEO AI Automation</span>
+            <span className="title-seo">SEO AI Automation Tool</span>
           </h2>
           <div className="section-line" />
         </div>
         <FadeCard className="featured-card" dir="left">
-          <div className="featured-top">
-            <div className="featured-copy">
-              <p className="featured-eyebrow">{p.eyebrow}</p>
-              <h3 className="featured-name">{p.name}</h3>
-              <p className="featured-headline">{p.headline}</p>
-              <p className="featured-summary">{p.summary}</p>
+          <div className="featured-copy">
+            <p className="featured-eyebrow">{p.eyebrow}</p>
+            <h3 className="featured-name hl-target">
+              <PointCue label="Pointing here" />
+              {p.name}
+            </h3>
+            <p className="featured-category">{p.category}</p>
+            <p className="featured-summary">{p.summary}</p>
+            <p className="featured-framework">{p.framework}</p>
+            <ul className="featured-list">
+              {p.capabilities.map((c) => (
+                <li key={c}>{c}</li>
+              ))}
+            </ul>
+            <div className="exp-tech">
+              {p.stack.map((t) => (
+                <span className="tech-tag" key={t}>
+                  {t}
+                </span>
+              ))}
             </div>
-            <div className="auto-panel" aria-label="95 percent automated">
-              <div className="auto-panel-value">95%</div>
-              <div className="auto-panel-label">Automated</div>
-              <ul className="auto-panel-list">
-                {p.automated.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
+            <dl className="featured-arch">
+              {p.architecture.map(([k, v]) => (
+                <div className="featured-arch-row" key={k}>
+                  <dt>{k}</dt>
+                  <dd>{v}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
-
-          <div className="featured-foot">
-            <div className="foot-block">
-              <div className="foot-kicker">5% human review</div>
-              <p>Brand · Indexing · Quality</p>
-            </div>
-            <div className="foot-block">
-              <div className="foot-kicker live">Live in production</div>
-              <p>Service-based client accounts</p>
-            </div>
-          </div>
-
-          <div className="exp-tech featured-stack">
-            {p.stack.map((t) => (
-              <span className="tech-tag" key={t}>
-                {t}
-              </span>
+          <div className="featured-metrics" aria-label="Automation framework">
+            {p.metrics.map((m) => (
+              <div className={`metric-block ${m.className}`} key={m.label}>
+                <div className="metric-value">{m.value}</div>
+                <div className="metric-label">{m.label}</div>
+                <p>{m.copy}</p>
+              </div>
             ))}
           </div>
         </FadeCard>
