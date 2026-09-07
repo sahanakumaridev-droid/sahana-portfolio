@@ -952,9 +952,35 @@ section { padding: 6.5rem 0; }
   .hero-layout { grid-template-columns: 1fr; }
   .hero-visual { order: -1; min-height: 0; justify-content: center; margin-bottom: 0.75rem; }
   .hero-badges { display: none; }
+  .hero { overflow: visible; }
   .hero-portrait .avatar-frame { width: 220px; height: 220px; }
-  .point-cue { display: none; }
-  .hl-target { padding-top: 0; }
+  .hl-target {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 0;
+    vertical-align: middle;
+    max-width: 100%;
+  }
+  .featured-name.hl-target {
+    align-items: flex-start;
+    padding-top: 0;
+  }
+  .point-cue {
+    position: static;
+    transform: none;
+    display: flex;
+    animation: none;
+    margin-bottom: 0.15rem;
+  }
+  .point-arrow {
+    animation: pointBounce 0.9s var(--ease-in-out) 0.2s 4 both;
+  }
+  .project-seo .point-cue {
+    left: auto;
+    top: auto;
+    margin-bottom: 0.45rem;
+  }
   .contact-grid,
   .featured-card,
   .skills-grid,
